@@ -47,14 +47,12 @@ public class MoveElevator implements Runnable {
             Platform.runLater(() -> {
                 elevatorModel.setElevatorStatus(ElevatorStatus.STOPPED);
 
+                // Oppdater nåværende etasje hver gang heisen stopper
+                elevatorModel.setCurrentFloor(floorName);
+
                 // Fjern den nettop behandlede etasjen fra køen
                 if (!elevatorModel.getMovingQueue().isEmpty()) {
                     elevatorModel.getMovingQueue().remove(0);
-                }
-
-                // Oppdater "nåværende etasje" kun hvis køen nå er tom
-                if (elevatorModel.getMovingQueue().isEmpty()) {
-                    elevatorModel.setCurrentFloor(floorName);
                 }
             });
 

@@ -13,7 +13,8 @@ public class ElevatorService {
         return thread;
     });
 
-    public void queueElevatorMove(ElevatorModel elevatorModel, DoorModel doorModel) {
+    public void queueElevatorMove(ElevatorModel elevatorModel, DoorModel doorModel, double targetFloor, String floorName) {
+        executor.submit(new MoveElevator(elevatorModel, doorModel, targetFloor, floorName));
         executor.submit(new DoorService(doorModel, elevatorModel));
     }
 

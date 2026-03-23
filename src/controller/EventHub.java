@@ -1,6 +1,7 @@
 package controller;
 
 import service.ElevatorService;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import model.DoorModel;
 import model.ElevatorModel;
@@ -19,7 +20,7 @@ public class EventHub {
     
     public EventHub(
         MainView mainView, 
-        ElevatorController elevatorController, 
+        BindingsHub bindingsHub, 
         FloorModel floorModel, 
         ElevatorService elevatorService,
         ElevatorModel elevatorModel,
@@ -36,27 +37,18 @@ public class EventHub {
     }
 
     private void eventsSetup(){
-        mainView.getFloor1btn().setOnAction(e -> {
-            String floorName = "Floor 1";
-            elevatorModel.getMovingQueue().add(floorName);
-            double targetY = floorModel.getFloor1YCoord();
-            elevatorService.queueElevatorMove(elevatorModel, targetY, floorName, doorModel, doorStatuslbl);
-        });
-
-        mainView.getFloor2btn().setOnAction(e -> {
-            String floorName = "Floor 2";
-            elevatorModel.getMovingQueue().add(floorName);
-            double targetY = floorModel.getFloor2YCoord();
-            elevatorService.queueElevatorMove(elevatorModel, targetY, floorName, doorModel, doorStatuslbl);
-        });
-
-        mainView.getFloor3btn().setOnAction(e -> {
-            String floorName = "Floor 3";
-            elevatorModel.getMovingQueue().add(floorName);
-            double targetY = floorModel.getFloor3YCoord();
-            elevatorService.queueElevatorMove(elevatorModel, targetY, floorName, doorModel, doorStatuslbl);
-        });
+        setUpButtons(mainView.getFloor1btn(), 1);
+        setUpButtons(mainView.getFloor2btn(), 2);
+        setUpButtons(mainView.getFloor3btn(), 3);
     }
 
+    private void setUpButtons(Button button, int floorNumber){
+        button.setOnAction(e -> {
+            String floorName = "Floor " + floorNumber;
+            double targetY = floorModel.getFloorYCoord(floorNumber);
+            elevatorModel.getMovingQueue().add(floorName);
+            elevatorService.queueElevatorMove(elevatorModel, doorModel, targetY, floorName);
+        });
+    }
 
 }

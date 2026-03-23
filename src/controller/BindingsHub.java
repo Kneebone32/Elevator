@@ -13,7 +13,7 @@ public class BindingsHub {
     private DoorModel doorModel;
 
 
-    public ElevatorController(ElevatorModel elevatorModel, MainView mainView, DoorModel doorModel){
+    public BindingsHub(ElevatorModel elevatorModel, MainView mainView, DoorModel doorModel){
         this.elevatorModel = elevatorModel;
         this.mainView = mainView;
         this.doorModel = doorModel;

@@ -3,7 +3,11 @@ import controller.EventHub;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.DoorModel;
+import model.ElevatorModel;
+import model.FloorModel;
 import service.ElevatorService;
+import view.MainView;
 
 public class App extends Application{
     
@@ -12,14 +16,17 @@ public class App extends Application{
     }
 
     public void start(Stage stage){
-
+        MainView mainView = new MainView();
+        ElevatorModel elevatorModel = new ElevatorModel();
+        FloorModel floorModel = new FloorModel();
         ElevatorService elevatorService = new ElevatorService();
+        DoorModel doorModel = new DoorModel();
 
-        //BindingsHub bindingsHub = new ElevatorController(elevatorModel, mainView, doorModel);
-        //EventHub eventHub = new EventHub(mainView, bindingsHub, floorModel, elevatorService, elevatorModel, doorModel);
+        BindingsHub bindingsHub = new BindingsHub(elevatorModel, mainView, doorModel);
+        EventHub eventHub = new EventHub(mainView, bindingsHub, floorModel, elevatorService, elevatorModel, doorModel);
 
 
-        Scene scene = new Scene(null);
+        Scene scene = new Scene(mainView.getBorderPane(), 500, 400);
         stage.setScene(scene);
         stage.setTitle("Elevator");
         stage.show();

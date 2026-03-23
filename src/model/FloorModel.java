@@ -1,21 +1,22 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FloorModel {
+    private final Map<Integer, Double> floorCoords = new HashMap<>();
 
-    private final double floor1Ycoord = 200.00;
-    private final double floor2Ycoord = 100.00;
-    private final double floor3Ycoord = 0.00;
-
-
-    
-    public double getFloor1Ycoord() {
-        return floor1Ycoord;
+    public FloorModel(){
+        floorCoords.put(1, 200.0);
+        floorCoords.put(2, 100.0);
+        floorCoords.put(3, 0.0);
     }
-    public double getFloor2Ycoord() {
-        return floor2Ycoord;
-    }
-    public double getFloor3Ycoord() {
-        return floor3Ycoord;
+
+    public double getFloorYCoord(int floorNumber){
+        return floorCoords.get(floorNumber);
     }
 
 }
+    
+    
+    

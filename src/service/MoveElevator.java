@@ -1,6 +1,10 @@
-package Service;
+package service;
 
 import javafx.application.Platform;
+import model.DoorModel;
+import model.ElevatorModel;
+import model.ElevatorStatus;
+
 
 // Runnable slik at MoveElevator kan kjøres på en bakgrunnstråd via ExecutorService
 public class MoveElevator implements Runnable {
@@ -25,32 +29,28 @@ public class MoveElevator implements Runnable {
         try {
             // Oppdater heisstatusen til å vise riktig bevegelsesretning
             Platform.runLater(() ->
-                elevatorModel.setElevatorStatus(step > 0.0 ? ElevatorStatus.MOVING_DOWN : ElevatorStatus.MOVING_UP)
+                elevatorModel.setElevatorStatus(step > 0.0 ? ElevatorStatus.MovingDown : ElevatorStatus.MovingUp)
             );
 
             // Flytt heisen ett steg om gangen til den er fremme ved måletasjen
             while (Math.abs(elevatorModel.getElevatorYCoord() - targetFloor) > 0.1) {
                 double nextYCoord = elevatorModel.getElevatorYCoord() + step;
 
-                // Oppdater Y-posisjonen til heisen og begge dørene samtidig på JavaFX-tråden
                 Platform.runLater(() -> {
                     elevatorModel.getElevatorYCoordProperty().set(nextYCoord);
                     doorModel.getLeftDoorYCoordProperty().set(nextYCoord);
                     doorModel.getRightDoorYCoordProperty().set(nextYCoord);
                 });
 
-                // Liten pause mellom hvert steg for å skape en jevn animasjon
                 Thread.sleep(10);
             }
 
             // Oppdater status og kø etter at denne etasjen er ferdig behandlet
             Platform.runLater(() -> {
-                elevatorModel.setElevatorStatus(ElevatorStatus.STOPPED);
+                elevatorModel.setElevatorStatus(ElevatorStatus.Idle);
 
-                // Oppdater nåværende etasje hver gang heisen stopper
                 elevatorModel.setCurrentFloor(floorName);
 
-                // Fjern den nettop behandlede etasjen fra køen
                 if (!elevatorModel.getMovingQueue().isEmpty()) {
                     elevatorModel.getMovingQueue().remove(0);
                 }

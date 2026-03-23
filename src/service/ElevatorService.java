@@ -2,6 +2,8 @@ package service;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import model.DoorModel;
+import model.ElevatorModel;
 
 public class ElevatorService {
 
@@ -11,17 +13,9 @@ public class ElevatorService {
         return thread;
     });
 
-
- //   public void queueElevatorMove(){
- //       //MoveElevator
- //       //DoorService
-//
- //       executor.submit(null); //MoveElevator
- //       executor.submit(null); //Doorservice
- //   }
-
-
-
+    public void queueElevatorMove(ElevatorModel elevatorModel, DoorModel doorModel) {
+        executor.submit(new DoorService(doorModel, elevatorModel));
+    }
 
     public void shutdown(){
         executor.shutdownNow();

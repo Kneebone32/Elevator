@@ -29,7 +29,7 @@ public class MoveElevator implements Runnable {
         try {
             // Oppdater heisstatusen til å vise riktig bevegelsesretning
             Platform.runLater(() ->
-                elevatorModel.setElevatorStatus(step > 0.0 ? ElevatorStatus.MovingDown : ElevatorStatus.MovingUp)
+                elevatorModel.setElevatorStatus(step > 0.0 ? ElevatorStatus.MOVING_DOWN : ElevatorStatus.MOVING_UP)
             );
 
             // Flytt heisen ett steg om gangen til den er fremme ved måletasjen
@@ -47,7 +47,7 @@ public class MoveElevator implements Runnable {
 
             // Oppdater status og kø etter at denne etasjen er ferdig behandlet
             Platform.runLater(() -> {
-                elevatorModel.setElevatorStatus(ElevatorStatus.Idle);
+                elevatorModel.setElevatorStatus(ElevatorStatus.IDLE);
 
                 elevatorModel.setCurrentFloor(floorName);
 

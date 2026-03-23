@@ -10,7 +10,7 @@ public class DoorModel {
     private double rightDoorStartX = -1.00;
     private double leftDoorStartX = 1.00;
     private final double openCoordsAmount = 30.00;
-    private ObjectProperty<DoorStatusEnum> doorStatus = new SimpleObjectProperty<>(DoorStatusEnum.Closed);
+    private ObjectProperty<DoorStatusEnum> doorStatus = new SimpleObjectProperty<>(DoorStatusEnum.CLOSED);
 
     private DoubleProperty rightDoorXCoord = new SimpleDoubleProperty(rightDoorStartX);
     private DoubleProperty rightDoorYCoord = new SimpleDoubleProperty(200.00);

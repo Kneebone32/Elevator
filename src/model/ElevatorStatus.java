@@ -2,9 +2,9 @@ package model;
 
 public enum ElevatorStatus {
 
-    MovingUp,
-    MovingDown,
-    Idle,
-    DoorOpening,
+    MOVING_UP,
+    MOVING_DOWN,
+    IDLE,
+    DOOR_OPENING,
 
 }

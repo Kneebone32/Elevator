@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 
 public class ElevatorModel {
 
-    private ObjectProperty<ElevatorStatus> elevatorStatus = new SimpleObjectProperty<>(ElevatorStatus.Idle);
+    private ObjectProperty<ElevatorStatus> elevatorStatus = new SimpleObjectProperty<>(ElevatorStatus.IDLE);
     private ObservableList<String> movingQueue = FXCollections.observableArrayList();
     private DoubleProperty elevatorYCoord = new SimpleDoubleProperty(200.0);
 

@@ -17,8 +17,8 @@ public class MainView {
 
     public Rectangle elevator = new Rectangle(120, 160, Color.LIGHTGRAY);
 
-    public Rectangle leftDoor = new Rectangle(60, 160, Color.DARKGRAY);
-    public Rectangle rightDoor = new Rectangle(60, 160, Color.DARKGRAY);
+    public Rectangle leftDoor = new Rectangle(60, 160, Color.BLACK);
+    public Rectangle rightDoor = new Rectangle(60, 160, Color.BLACK);
 
     public Button floor1btn = new Button("1");
     public Button floor2btn = new Button("2");
@@ -26,6 +26,7 @@ public class MainView {
 
     public Label doorStateLbl = new Label("Door: ");
     public Label elevatorStateLbl = new Label("Elevator: ");
+    public Label currFloorLbl = new Label("Current floor: ");
 
     public TextArea textArea = new TextArea();
 
@@ -33,13 +34,15 @@ public class MainView {
 
         textArea.setEditable(false);
         textArea.setPrefRowCount(5);
-        textArea.setPrefWidth(150);
+        textArea.setPrefWidth(300);
 
-        StackPane elevatorStack = new StackPane(elevator, leftDoor, rightDoor);
+        HBox doors = new HBox(leftDoor, rightDoor);
+
+        StackPane elevatorStack = new StackPane(elevator, doors);
 
         HBox buttons = new HBox(10, floor1btn, floor2btn, floor3btn);
         buttons.setAlignment(Pos.CENTER);
-        VBox status = new VBox(5, doorStateLbl, elevatorStateLbl);
+        VBox status = new VBox(5, doorStateLbl, elevatorStateLbl, currFloorLbl);
 
         HBox mainLayout = new HBox(40);
         
@@ -51,7 +54,6 @@ public class MainView {
 
         mainLayout.setAlignment(Pos.CENTER);
         mainLayout.getChildren().addAll(leftSide, rightSide);
-        mainLayout.setTranslateY(120);
 
         root.getChildren().add(mainLayout);
     }
@@ -95,4 +97,9 @@ public class MainView {
     public TextArea getTextArea() {
         return textArea;
     }
+
+    public Label getCurrentFloor(){
+        return currFloorLbl;
+    }
+
 }

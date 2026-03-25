@@ -9,6 +9,7 @@ import model.FloorModel;
 import service.ElevatorService;
 import view.MainView;
 
+@SuppressWarnings("unused")
 public class App extends Application{
     
     public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class App extends Application{
         EventHub eventHub = new EventHub(mainView, bindingsHub, floorModel, elevatorService, elevatorModel, doorModel);
 
 
-        Scene scene = new Scene(mainView.getBorderPane(), 500, 400);
+        Scene scene = new Scene(mainView.getBorderPane(), 720, 720);
         stage.setScene(scene);
         stage.setTitle("Elevator");
         stage.show();

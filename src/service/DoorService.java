@@ -20,7 +20,7 @@ public class DoorService implements Runnable {
     public void run() {
         try {
             openDoors();
-            Thread.sleep(5000);
+            Thread.sleep(1000);
             closeDoors();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -29,8 +29,8 @@ public class DoorService implements Runnable {
 
     // Metode som åpner døren
     private void openDoors() throws InterruptedException {
-        Platform.runLater(() -> elevatorModel.setElevatorStatus(ElevatorStatus.DoorOpening));
-        Platform.runLater(() -> doorModel.getDoorStatusProperty().set(DoorStatusEnum.Opening));
+        Platform.runLater(() -> elevatorModel.setElevatorStatus(ElevatorStatus.DOOR_OPENING));
+        Platform.runLater(() -> doorModel.getDoorStatusProperty().set(DoorStatusEnum.OPENING));
 
         double targetRightX = doorModel.getRightDoorStartX() + doorModel.getOpenCoordsAmount();
 
@@ -46,12 +46,12 @@ public class DoorService implements Runnable {
             Thread.sleep(10);
         }
 
-        Platform.runLater(() -> doorModel.getDoorStatusProperty().set(DoorStatusEnum.Open));
+        Platform.runLater(() -> doorModel.getDoorStatusProperty().set(DoorStatusEnum.OPEN));
     }
 
     // Metode som lukker døren
     private void closeDoors() throws InterruptedException {
-        Platform.runLater(() -> doorModel.getDoorStatusProperty().set(DoorStatusEnum.Closing));
+        Platform.runLater(() -> doorModel.getDoorStatusProperty().set(DoorStatusEnum.CLOSING));
 
         double targetRightX = doorModel.getRightDoorStartX();
 
@@ -68,8 +68,8 @@ public class DoorService implements Runnable {
         }
 
         Platform.runLater(() -> {
-            doorModel.getDoorStatusProperty().set(DoorStatusEnum.Closed);
-            elevatorModel.setElevatorStatus(ElevatorStatus.Idle);
+            doorModel.getDoorStatusProperty().set(DoorStatusEnum.CLOSED);
+            elevatorModel.setElevatorStatus(ElevatorStatus.IDLE);
         });
     }
 }

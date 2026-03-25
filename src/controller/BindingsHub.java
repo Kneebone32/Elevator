@@ -35,6 +35,8 @@ public class BindingsHub {
         mainView.getRightDoor().translateYProperty().bind(doorModel.getRightDoorYCoordProperty());
         mainView.getRightDoor().translateXProperty().bind(doorModel.getRightDoorXCoordProperty());
 
+        mainView.getCurrentFloor().textProperty().bind(Bindings.concat("Current floor: ", elevatorModel.getCurrentFloorProperty()));
+
         mainView.getDoorStatelbl().textProperty().bind(Bindings.concat("DoorStatus: ", doorModel.getDoorStatusProperty()));
         mainView.getElevatorStatelbl().textProperty().bind(Bindings.concat("ElevatorStatus: ", elevatorModel.getElevatorStatusProperty()));
         

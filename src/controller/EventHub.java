@@ -2,7 +2,6 @@ package controller;
 
 import service.ElevatorService;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import model.DoorModel;
 import model.ElevatorModel;
 import model.FloorModel;
@@ -15,7 +14,6 @@ public class EventHub {
     private ElevatorService elevatorService;
     private ElevatorModel elevatorModel;
     private DoorModel doorModel;
-    private Label doorStatuslbl;
 
     
     public EventHub(
@@ -32,7 +30,6 @@ public class EventHub {
         this.elevatorService = elevatorService;
         this.elevatorModel = elevatorModel;
         this.doorModel = doorModel;
-        this.doorStatuslbl = mainView.getDoorStatelbl();
         eventsSetup();
     }
 

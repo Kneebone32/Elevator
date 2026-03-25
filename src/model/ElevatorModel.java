@@ -12,6 +12,7 @@ public class ElevatorModel {
     private ObjectProperty<ElevatorStatus> elevatorStatus = new SimpleObjectProperty<>(ElevatorStatus.IDLE);
     private ObservableList<String> movingQueue = FXCollections.observableArrayList();
     private DoubleProperty elevatorYCoord = new SimpleDoubleProperty(200.0);
+    private ObjectProperty<String> currentFloor = new SimpleObjectProperty<>("Floor 1");
 
 
 
@@ -31,6 +32,10 @@ public class ElevatorModel {
         return elevatorYCoord.get();
     }
 
+    public ObjectProperty<String> getCurrentFloorProperty(){
+        return currentFloor;
+    }
+
     public void setElevatorYCoord(double newYCoord) {
         this.elevatorYCoord.set(newYCoord);
     }
@@ -39,6 +44,8 @@ public class ElevatorModel {
         this.elevatorStatus.set(elevatorStatus);
     }
 
-
+    public void setCurrentFloor(String floorName){
+        this.currentFloor.set(floorName);
+    }
 
 }

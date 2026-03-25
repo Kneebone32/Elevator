@@ -1,81 +1,98 @@
 package view;
 
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.shape.*;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.geometry.Pos;
 
 public class MainView {
 
-    BorderPane root = new BorderPane();
+    public StackPane root = new StackPane();
 
-    Pane elevatorView = new Pane();
-    Rectangle leftDoor = new Rectangle(115, 240);
-    Rectangle rightDoor = new Rectangle(115, 240);
+    public Rectangle elevator = new Rectangle(120, 160, Color.LIGHTGRAY);
 
-    Button floor1btn = new Button();
-    Button floor2btn = new Button();
-    Button floor3btn = new Button();
+    public Rectangle leftDoor = new Rectangle(60, 160, Color.DARKGRAY);
+    public Rectangle rightDoor = new Rectangle(60, 160, Color.DARKGRAY);
 
-    Label doorStatelbl = new Label();
-    Label elevatorStatelbl = new Label();
-    TextArea textArea = new TextArea();
+    public Button floor1btn = new Button("1");
+    public Button floor2btn = new Button("2");
+    public Button floor3btn = new Button("3");
+
+    public Label doorStateLbl = new Label("Door: ");
+    public Label elevatorStateLbl = new Label("Elevator: ");
+
+    public TextArea textArea = new TextArea();
 
     public MainView() {
 
-        Pane content = new Pane();
-
-        content.getChildren().addAll(
-            new Rectangle(90, 40, 230, 720),
-            new Line(90, 280, 320, 280),
-            new Line(90, 520, 320, 520)
-        );
-
-        elevatorView.setLayoutX(75);
-        elevatorView.setLayoutY(40);
-
-        rightDoor.setLayoutX(115);
-
-        elevatorView.getChildren().addAll(
-            new Rectangle(15, 0, 230, 240),
-            leftDoor,
-            rightDoor
-        );
-
-        Pane panel = new Pane();
-        panel.setLayoutX(470);
-        panel.setLayoutY(120);
-
-        floor3btn.setLayoutY(0);
-        floor2btn.setLayoutY(50);
-        floor1btn.setLayoutY(100);
-
-        elevatorStatelbl.setLayoutY(170);
-        doorStatelbl.setLayoutY(200);
-
-        textArea.setLayoutY(240);
-        textArea.setPrefSize(140, 100);
         textArea.setEditable(false);
+        textArea.setPrefRowCount(5);
+        textArea.setPrefWidth(150);
 
-        panel.getChildren().addAll(
-            floor3btn, floor2btn, floor1btn,
-            elevatorStatelbl, doorStatelbl, textArea
-        );
+        StackPane elevatorStack = new StackPane(elevator, leftDoor, rightDoor);
 
-        content.getChildren().addAll(elevatorView, panel);
-        root.setCenter(content);
+        HBox buttons = new HBox(10, floor1btn, floor2btn, floor3btn);
+        buttons.setAlignment(Pos.CENTER);
+        VBox status = new VBox(5, doorStateLbl, elevatorStateLbl);
+
+        HBox mainLayout = new HBox(40);
+        
+        VBox leftSide = new VBox(elevatorStack);
+        leftSide.setAlignment(Pos.CENTER);
+
+        VBox rightSide = new VBox(15, buttons, textArea, status);
+        rightSide.setAlignment(Pos.TOP_CENTER);
+
+        mainLayout.setAlignment(Pos.CENTER);
+        mainLayout.getChildren().addAll(leftSide, rightSide);
+        mainLayout.setTranslateY(120);
+
+        root.getChildren().add(mainLayout);
     }
 
-    public BorderPane getBorderPane() { return root; }
+    public Parent getBorderPane() {
+        return root;
+    }
 
-    public Pane getElevatorView() { return elevatorView; }
-    public Rectangle getLeftDoor() { return leftDoor; }
-    public Rectangle getRightDoor() { return rightDoor; }
+    public Rectangle getElevatorView() {
+        return elevator;
+    }
 
-    public Button getFloor1btn() { return floor1btn; }
-    public Button getFloor2btn() { return floor2btn; }
-    public Button getFloor3btn() { return floor3btn; }
+    public Rectangle getLeftDoor() {
+        return leftDoor;
+    }
 
-    public Label getDoorStatelbl() { return doorStatelbl; }
-    public Label getElevatorStatelbl() { return elevatorStatelbl; }
-    public TextArea getTextArea() { return textArea; }
+    public Rectangle getRightDoor() {
+        return rightDoor;
+    }
+
+    public Button getFloor1btn() {
+        return floor1btn;
+    }
+
+    public Button getFloor2btn() {
+        return floor2btn;
+    }
+
+    public Button getFloor3btn() {
+        return floor3btn;
+    }
+
+    public Label getDoorStatelbl() {
+        return doorStateLbl;
+    }
+
+    public Label getElevatorStatelbl() {
+        return elevatorStateLbl;
+    }
+
+    public TextArea getTextArea() {
+        return textArea;
+    }
 }
